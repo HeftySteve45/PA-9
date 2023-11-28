@@ -1,5 +1,14 @@
 #include "MainMenu.h"
+ /*Menu::Menu(double width, double height)
+{
+     this->choices.loadFromFile("Brush King.ttf");
 
+
+}
+ Menu::~Menu()
+ {
+
+ }*/
 void Menu::displayMenu()
 {
     sf::RenderWindow window(sf::VideoMode(1440, 768), "SFML works!");
@@ -8,6 +17,19 @@ void Menu::displayMenu()
 
     sf::Sprite background;
     sf::Texture texture1;
+
+    sf::Text MainTitle;
+
+    texture1.loadFromFile("butch background.png");
+    
+    this->title.loadFromFile("Martyric_PersonalUse.ttf");
+    MainTitle.setFont(title);
+    MainTitle.setString("Butch Fighter");
+    MainTitle.setCharacterSize(128);
+    MainTitle.setFillColor(sf::Color::Red);
+    MainTitle.setOutlineColor(sf::Color(128,128,128));
+    MainTitle.setOutlineThickness(3);
+    MainTitle.setPosition(384, 0);
 
     texture1.loadFromFile("butch background.png");
 
@@ -24,6 +46,7 @@ void Menu::displayMenu()
 
         window.clear();
         window.draw(background);
+        window.draw(MainTitle);
         window.display();
     }
 }
