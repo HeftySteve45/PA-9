@@ -27,7 +27,7 @@ void Menu::displayMenu()
     MainTitle.setString("Butch Fighter");
     MainTitle.setCharacterSize(128);
     MainTitle.setFillColor(sf::Color(152, 30, 50));
-    MainTitle.setOutlineColor(sf::Color(0, 80, 67,50));
+    MainTitle.setOutlineColor(sf::Color(94, 106, 113));
     MainTitle.setOutlineThickness(2);
     MainTitle.setPosition(384, 0);
 
