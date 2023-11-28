@@ -26,9 +26,9 @@ void Menu::displayMenu()
     MainTitle.setFont(title);
     MainTitle.setString("Butch Fighter");
     MainTitle.setCharacterSize(128);
-    MainTitle.setFillColor(sf::Color::Red);
-    MainTitle.setOutlineColor(sf::Color(128,128,128));
-    MainTitle.setOutlineThickness(3);
+    MainTitle.setFillColor(sf::Color(152, 30, 50));
+    MainTitle.setOutlineColor(sf::Color(0, 80, 67,50));
+    MainTitle.setOutlineThickness(2);
     MainTitle.setPosition(384, 0);
 
     texture1.loadFromFile("butch background.png");
