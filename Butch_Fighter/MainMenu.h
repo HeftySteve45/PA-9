@@ -5,5 +5,7 @@
 class Menu
 {
 public:
+	void displayMenu();
+
 private:
 };
