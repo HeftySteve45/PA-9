@@ -1,17 +1,22 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 
 class Menu
 {
 public:
-	Menu();
-	~Menu();
+	// Menu(double width, double height);
 	void displayMenu();
-	
+	//~Menu();
+	//void displayMenu();
+	void playMenuMusic();
+	void stopMenuMusic();
+
 private:
 	sf::Font title;
 	sf::Font choices;
-	sf::Text MainMenu[3];
-	int selectedItem;
+
+	sf::Sound menuSound;
+	sf::SoundBuffer menuBuffer;
 };
