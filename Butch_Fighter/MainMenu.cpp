@@ -17,6 +17,7 @@ void Menu::displayMenu()
 
     sf::Sprite background;
     sf::Texture texture1;
+
     sf::Text MainTitle;
 
     texture1.loadFromFile("butch background.png");
@@ -29,6 +30,8 @@ void Menu::displayMenu()
     MainTitle.setOutlineColor(sf::Color(128,128,128));
     MainTitle.setOutlineThickness(3);
     MainTitle.setPosition(384, 0);
+
+    texture1.loadFromFile("butch background.png");
 
     background.setTexture(texture1);
     background.setScale(10, 4);
