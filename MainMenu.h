@@ -2,11 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 
-
 class MainMenu
 {
 public:
-
 
 private:
 };
