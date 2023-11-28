@@ -5,5 +5,10 @@
 class Menu
 {
 public:
+	// Menu(double width, double height);
+	void displayMenu();
+	//~Menu();
 private:
+	sf::Font title;
+	sf::Font choices;
 };
