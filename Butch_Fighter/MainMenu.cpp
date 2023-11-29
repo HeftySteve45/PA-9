@@ -53,6 +53,7 @@ void Menu::displayMenu()
 
     background.setTexture(texture1);
     background.setScale(10, 4);
+    playMenuMusic();
     while (window.isOpen())
     {
         sf::Event event;
@@ -72,4 +73,17 @@ void Menu::displayMenu()
         }
         window.display();
     }
+    stopMenuMusic();
+}
+
+void Menu::playMenuMusic()
+{
+    this->menuBuffer.loadFromFile("WSU_Fight_Song.wav");
+    this->menuSound.setBuffer(this->menuBuffer);
+    this->menuSound.setLoop(true);
+    this->menuSound.play();
+}
+void Menu::stopMenuMusic()
+{
+    this->menuSound.stop();
 }
