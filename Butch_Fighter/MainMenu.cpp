@@ -1,11 +1,16 @@
 #include "MainMenu.h"
+
+/*
+    Function: Menu()
+    Description: is the default constructor and sets the array up with the buttons for the main menu selection
+    */
  Menu::Menu()
 {
      choices.loadFromFile("Brush King.otf");
 
      //play 
      MainMenu[0].setFont(choices);
-     MainMenu[0].setFillColor(sf::Color(128,128,128));
+     MainMenu[0].setFillColor(sf::Color::Red);
      MainMenu[0].setString("Play");
      MainMenu[0].setCharacterSize(50);
      MainMenu[0].setPosition(50, 220);
@@ -23,18 +28,27 @@
      MainMenu[2].setString("Exit");
      MainMenu[2].setCharacterSize(50);
      MainMenu[2].setPosition(50, 520);
-}
 
+     selectedItem = 0;
+}
+ /*
+    Funciton: ~Menu()
+    Description: the default constructor for the main menu so it closes the window
+    */
  Menu::~Menu()
  {
-
+     
  }
+
+ /*
+    Function: displayMenu()
+    Description: it displays the menu with the background and the choices
+    */
 void Menu::displayMenu()
 {
     Menu mainmenu;
-    sf::RenderWindow window(sf::VideoMode(1440, 768), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    ExitMenu exit;
+    sf::RenderWindow window(sf::VideoMode(1440, 768), "Butch Fighter!");
 
     sf::Sprite background;
     sf::Texture texture1;
@@ -47,43 +61,147 @@ void Menu::displayMenu()
     MainTitle.setString("Butch Fighter");
     MainTitle.setCharacterSize(120);
     MainTitle.setFillColor(sf::Color::Red);
-    MainTitle.setOutlineColor(sf::Color(128,128,128));
-    MainTitle.setOutlineThickness(3);
+    MainTitle.setOutlineColor(sf::Color::Black);
+    MainTitle.setOutlineThickness(4);
     MainTitle.setPosition(384, 0);
 
     background.setTexture(texture1);
     background.setScale(10, 4);
-    playMenuMusic();
+
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
+            switch (event.type)
+            {
+            case sf::Event::KeyReleased:
+                switch (event.key.code)
+                {
+                case sf::Keyboard::Up:
+                    moveup();
+                    break;
+                case sf::Keyboard::Down:
+                    movedown();
+                    break;
+                case sf::Keyboard::W:
+                    moveup();
+                    break;
+                case sf::Keyboard::S:
+                    movedown();
+                    break;
+                case sf::Keyboard::Escape:
+                    std::cout << "in the exit menu" << std::endl;
+                    mainmenu.exitfunction(window);
+                    break;
+                case sf::Keyboard::Enter:
+                    switch (getpressedItem())
+                    {
+                    case 0:
+                        window.clear();
+                        std::cout << "Playing the game" << std::endl; 
+                        PlayGame(window);
+                        break;
+                    case 1:
+                        window.clear();
+                        std::cout << "control menu" << std::endl;
+                        break;
+                    case 2:
+                        std::cout << "Closing the widnow and excting the game" << std::endl;
+                        mainmenu.exitfunction(window);
+                        break;
+                    }
+                    break;
+                }
+                break;
+            }
         }
 
         window.clear();
-        window.draw(background);
-        window.draw(MainTitle);
-       
-        for (int i = 0; i < 3; i++)
-        {
-            window.draw(MainMenu[i]);
-        }
+        DrawMenu(window,background,MainTitle);
         window.display();
     }
-    stopMenuMusic();
 }
 
-void Menu::playMenuMusic()
+/*
+    Function: moveup()
+    Description: moves the selection of the choices in the menu up
+    */
+void Menu:: moveup()
 {
-    this->menuBuffer.loadFromFile("WSU_Fight_Song.wav");
-    this->menuSound.setBuffer(this->menuBuffer);
-    this->menuSound.setLoop(true);
-    this->menuSound.play();
+    if (selectedItem - 1 >= 0)
+    {
+        MainMenu[selectedItem].setFillColor(sf::Color::Black);
+        selectedItem--;
+        MainMenu[selectedItem].setFillColor(sf::Color::Red);
+        std::cout << "moving up" << std::endl;
+    }
 }
-void Menu::stopMenuMusic()
+
+/*
+    Funciton: movedown();
+    Description: moves the selection of the choices in the menu down
+    */
+void Menu::movedown()
 {
-    this->menuSound.stop();
+    if (selectedItem + 1 < 3)
+    {
+        MainMenu[selectedItem].setFillColor(sf::Color::Black);
+        selectedItem++;
+        MainMenu[selectedItem].setFillColor(sf::Color::Red);
+        std::cout << "moving down" << std::endl;
+    }
 }
+
+/*
+    Funciton: getpressedItem()
+    Description: retunrs the index of the array that the selected choice is on
+    */
+int Menu::getpressedItem()
+{
+    return this->selectedItem;
+}
+
+/*
+    Function:DrawMenu()
+    Description: draws the full menu including the background
+    */
+void Menu::DrawMenu(sf::RenderWindow& window, sf::Sprite& background, sf::Text&MainTitle)
+{
+    window.draw(background);
+    window.draw(MainTitle);
+
+    for (int i = 0; i < 3; i++)
+    {
+        window.draw(MainMenu[i]);
+    }
+}
+
+/*
+    Function:PlayGame()
+    Description: when the play choice is selected the play game fucntion is called to actually run the game
+    */
+void Menu:: PlayGame(sf::RenderWindow& window)
+{
+    sf::Sprite gamebackground;
+    sf::Texture texture1;
+
+    texture1.loadFromFile("Butch Fighter Baclground.png");
+    gamebackground.setTexture(texture1);
+    gamebackground.setScale(9, 4);
+    window.clear();
+    window.draw(gamebackground);
+    window.display();
+    Sleep(3000);
+}
+
+/*
+    Function: exitfunction()
+    Description: is called when the escape key is hit to see if you really want to exit
+    */
+void Menu::exitfunction(sf::RenderWindow& window)
+{
+    ExitMenu exit;
+    exit.displayExitMenu(window);
+}
+
