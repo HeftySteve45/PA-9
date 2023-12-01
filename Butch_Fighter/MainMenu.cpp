@@ -48,7 +48,7 @@ void Menu::displayMenu()
 {
     Menu mainmenu;
     ExitMenu exit;
-    sf::RenderWindow window(sf::VideoMode(1440, 768), "Butch Fighter!");
+    sf::RenderWindow window(sf::VideoMode(1440, 768), "Butch Fighter!", sf::Style::None);
     window.setFramerateLimit(60);//cap frame rate to 60 frames per second
     sf::Sprite background;
     sf::Texture texture1;
@@ -70,6 +70,7 @@ void Menu::displayMenu()
 
     while (window.isOpen())
     {
+        playMenuMusic();
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -100,6 +101,7 @@ void Menu::displayMenu()
                     case 0:
                         window.clear();
                         std::cout << "Playing the game" << std::endl; 
+                        stopMenuMusic();
                         PlayGame(window);
                         break;
                     case 1:
@@ -107,7 +109,8 @@ void Menu::displayMenu()
                         std::cout << "control menu" << std::endl;
                         break;
                     case 2:
-                        std::cout << "Closing the widnow and excting the game" << std::endl;
+                        std::cout << "Closing the widnow and exiting the game" << std::endl;
+                        stopMenuMusic();
                         mainmenu.exitfunction(window);
                         break;
                     }
@@ -205,3 +208,26 @@ void Menu::exitfunction(sf::RenderWindow& window)
     exit.displayExitMenu(window);
 }
 
+/*
+    Function: playMenuMusic()
+    Description: loads the menu music into sound buffer and sets the buffer to the menu sound. sets loop to true and starts
+    */
+void Menu::playMenuMusic()
+{
+    if (this->menuSound.getStatus() != sf::Sound::Playing)
+    {
+    this->menuBuffer.loadFromFile("WSU_Fight_Song.wav");
+    this->menuSound.setBuffer(this->menuBuffer);
+    this->menuSound.setLoop(true);
+    this->menuSound.play();
+    }
+}
+
+/*
+    Function: playMenuMusic()
+    Description: stops the menu music
+    */
+void Menu::stopMenuMusic()
+{
+    this->menuSound.stop();
+}
