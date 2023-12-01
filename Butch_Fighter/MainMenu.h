@@ -62,6 +62,17 @@ public:
 	*/
 	void exitfunction(sf::RenderWindow& window);
 	
+	/*
+	Function: playMenuMusic()
+	Description: loads the menu music into sound buffer and sets the buffer to the menu sound. sets loop to true and starts
+	*/
+	void playMenuMusic();
+
+	/*
+	Function: playMenuMusic()
+	Description: stops the menu music
+	*/
+	void stopMenuMusic();
 
 private:
 
@@ -69,4 +80,7 @@ private:
 	sf::Font choices;
 	sf::Text MainMenu[3];
 	int selectedItem;
+
+	sf::Sound menuSound;
+	sf::SoundBuffer menuBuffer;
 };
