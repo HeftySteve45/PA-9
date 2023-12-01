@@ -49,7 +49,7 @@ void Menu::displayMenu()
     Menu mainmenu;
     ExitMenu exit;
     sf::RenderWindow window(sf::VideoMode(1440, 768), "Butch Fighter!");
-
+    window.setFramerateLimit(60);//cap frame rate to 60 frames per second
     sf::Sprite background;
     sf::Texture texture1;
     sf::Text MainTitle;
