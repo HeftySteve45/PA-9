@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Butch.cpp" />
+    <ClCompile Include="Controls.cpp" />
     <ClCompile Include="ExitMenu.cpp" />
     <ClCompile Include="Fighter.cpp" />
     <ClCompile Include="Harry.cpp" />
@@ -149,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Butch.hpp" />
+    <ClInclude Include="Controls.h" />
     <ClInclude Include="ExitMenu.h" />
     <ClInclude Include="Fighter.hpp" />
     <ClInclude Include="Harry.hpp" />
