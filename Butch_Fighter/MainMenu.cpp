@@ -48,6 +48,7 @@ void Menu::displayMenu()
 {
     Menu mainmenu;
     ExitMenu exit;
+    
     sf::RenderWindow window(sf::VideoMode(1440, 768), "Butch Fighter!", sf::Style::None);
     window.setFramerateLimit(60);//cap frame rate to 60 frames per second
     sf::Sprite background;
@@ -93,7 +94,7 @@ void Menu::displayMenu()
                     break;
                 case sf::Keyboard::Escape:
                     std::cout << "in the exit menu" << std::endl;
-                    mainmenu.exitfunction(window);
+                    exit.displayExitMenu(window);
                     break;
                 case sf::Keyboard::Enter:
                     switch (getpressedItem())
@@ -106,12 +107,13 @@ void Menu::displayMenu()
                         break;
                     case 1:
                         window.clear();
+                        controls.ControlScreen(window);
                         std::cout << "control menu" << std::endl;
                         break;
                     case 2:
                         std::cout << "Closing the widnow and exiting the game" << std::endl;
                         stopMenuMusic();
-                        mainmenu.exitfunction(window);
+                        exit.displayExitMenu(window);
                         break;
                     }
                     break;
@@ -196,16 +198,6 @@ void Menu:: PlayGame(sf::RenderWindow& window)
     window.draw(gamebackground);
     window.display();
     Sleep(3000);
-}
-
-/*
-    Function: exitfunction()
-    Description: is called when the escape key is hit to see if you really want to exit
-    */
-void Menu::exitfunction(sf::RenderWindow& window)
-{
-    ExitMenu exit;
-    exit.displayExitMenu(window);
 }
 
 /*

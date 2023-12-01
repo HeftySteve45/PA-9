@@ -1,5 +1,6 @@
 #pragma once
 #include "ExitMenu.h"
+#include "Controls.h"
 
 
 
@@ -55,12 +56,6 @@ public:
 	Description: when the play choice is selected the play game fucntion is called to actually run the game
 	*/
 	void PlayGame(sf::RenderWindow& window);
-
-	/*
-	Function: exitfunction()
-	Description: is called when the escape key is hit to see if you really want to exit
-	*/
-	void exitfunction(sf::RenderWindow& window);
 	
 	/*
 	Function: playMenuMusic()
@@ -80,6 +75,8 @@ private:
 	sf::Font choices;
 	sf::Text MainMenu[3];
 	int selectedItem;
+	ExitMenu exit;
+	Controls controls;
 
 	sf::Sound menuSound;
 	sf::SoundBuffer menuBuffer;
