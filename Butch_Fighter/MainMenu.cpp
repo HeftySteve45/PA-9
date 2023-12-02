@@ -190,14 +190,17 @@ void Menu:: PlayGame(sf::RenderWindow& window)
 {
     sf::Sprite gamebackground;
     sf::Texture texture1;
-
+ 
     texture1.loadFromFile("Butch Fighter Baclground.png");
     gamebackground.setTexture(texture1);
     gamebackground.setScale(9, 4);
     window.clear();
     window.draw(gamebackground);
     window.display();
+
     Sleep(3000);
+
+    
 }
 
 /*
