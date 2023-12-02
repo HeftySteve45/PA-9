@@ -44,4 +44,6 @@ private:
 	sf::Font font, Tfont;
 	sf::Text Titles[3];
 	sf::Text title_name;
+	sf::Text back;
+	sf::RectangleShape back_s;
 };

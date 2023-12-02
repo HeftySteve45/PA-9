@@ -76,6 +76,16 @@ Controls::Controls()
 	controls[6].setFillColor(sf::Color::Black);
 	controls[6].setPosition(100, 700);
 
+	back_s.setSize(sf::Vector2f(150, 80));
+	back_s.setFillColor(sf::Color::Red);
+	back_s.setPosition(10, 10);
+	back_s.setOutlineColor(sf::Color::Black);
+	back_s.setOutlineThickness(3);
+
+	back.setFont(font);
+	back.setString("Back");
+	back.setFillColor(sf::Color::White);
+	back.setPosition(25,30);
 }
 
 /*
@@ -104,17 +114,116 @@ void Controls::DrawControls(sf::RenderWindow& window)
 {
 	sf::Sprite background;
 	sf::Texture t1, t2;
+	sf::Event event;
 	t1.loadFromFile("Butch c.png");
 	background.setTexture(t1);
 	background.setScale(9, 4);
 
 	t2.loadFromFile("Keyboard.png");
 
-	window.draw(background);
-	window.draw(title_name);
-	DrawArrays(window);
-	window.display();
-	Sleep(3000);
+	int exit = 0;
+
+	while (exit == 0)
+	{
+		while (window.pollEvent(event))
+		{
+			switch (event.type)
+			{
+			case sf::Event::KeyReleased:
+				switch (event.key.code)
+				{
+				case sf::Keyboard::Return:
+					window.clear();
+					exit = 1;
+					break;
+				}
+			}
+		}
+		// right
+		P1[0].setTexture(t2);
+		P1[0].setTextureRect(sf::IntRect(214, 128, 30, 30));
+		P1[0].setPosition(620, 225);
+		P1[0].setScale(2, 2);
+
+		P2[0].setTexture(t2);
+		P2[0].setTextureRect(sf::IntRect(663, 192, 30, 30));
+		P2[0].setPosition(1100, 225);
+		P2[0].setScale(2, 2);
+
+		//left
+		P1[1].setTexture(t2);
+		P1[1].setTextureRect(sf::IntRect(150, 128, 30, 30));
+		P1[1].setPosition(620, 300);
+		P1[1].setScale(2, 2);
+
+		P2[1].setTexture(t2);
+		P2[1].setTextureRect(sf::IntRect(598, 192, 30, 30));
+		P2[1].setPosition(1100, 300);
+		P2[1].setScale(2, 2);
+
+		//jump
+		P1[2].setTexture(t2);
+		P1[2].setTextureRect(sf::IntRect(184, 96, 30, 30));
+		P1[2].setPosition(620, 375);
+		P1[2].setScale(2, 2);
+
+		P2[2].setTexture(t2);
+		P2[2].setTextureRect(sf::IntRect(631, 159, 30, 30));
+		P2[2].setPosition(1100, 375);
+		P2[2].setScale(2, 2);
+
+		//duck
+		P1[3].setTexture(t2);
+		P1[3].setTextureRect(sf::IntRect(184, 129, 30, 30));
+		P1[3].setPosition(620, 450);
+		P1[3].setScale(2, 2);
+
+		P2[3].setTexture(t2);
+		P2[3].setTextureRect(sf::IntRect(631, 192, 30, 30));
+		P2[3].setPosition(1100, 450);
+		P2[3].setScale(2, 2);
+
+		//punch 
+		P1[4].setTexture(t2);
+		P1[4].setTextureRect(sf::IntRect(150, 96, 30, 30));
+		P1[4].setPosition(620, 525);
+		P1[4].setScale(2, 2);
+
+		P2[4].setTexture(t2);
+		P2[4].setTextureRect(sf::IntRect(390, 160, 30, 30));
+		P2[4].setPosition(1100, 525);
+		P2[4].setScale(2, 2);
+
+		//kick
+		P1[5].setTexture(t2);
+		P1[5].setTextureRect(sf::IntRect(214, 96, 30, 30));
+		P1[5].setPosition(620, 600);
+		P1[5].setScale(2, 2);
+
+		P2[5].setTexture(t2);
+		P2[5].setTextureRect(sf::IntRect(422, 160, 30, 30));
+		P2[5].setPosition(1100, 600);
+		P2[5].setScale(2, 2);
+
+		//block
+		P1[6].setTexture(t2);
+		P1[6].setTextureRect(sf::IntRect(246, 96, 30, 30));
+		P1[6].setPosition(620, 675);
+		P1[6].setScale(2, 2);
+
+		P2[6].setTexture(t2);
+		P2[6].setTextureRect(sf::IntRect(422, 160, 30, 30));
+		P2[6].setPosition(1100, 675);
+		P2[6].setScale(2, 2);
+
+
+		window.draw(background);
+		window.draw(title_name);
+		window.draw(back_s);
+		window.draw(back);
+		DrawArrays(window);
+		window.display();
+	}
 }
 
 /*
@@ -131,6 +240,7 @@ void Controls::DrawArrays(sf::RenderWindow& window)
 	for (int j = 0; j < 7; ++j)
 	{
 		window.draw(controls[j]);
+		window.draw(P1[j]);
+		window.draw(P2[j]);
 	}
-
 }
