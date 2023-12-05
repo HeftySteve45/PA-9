@@ -163,7 +163,6 @@
     <Image Include="Butch Fighter Baclground.png" />
     <Image Include="Butch_Sprites.png" />
     <Image Include="Harry_Sprites.png" />
-    <Image Include="Mario.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Brush King.otf" />
@@ -172,6 +171,9 @@
   <ItemGroup>
     <Media Include="Punch.wav" />
     <Media Include="WSU_Fight_Song.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="README.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
