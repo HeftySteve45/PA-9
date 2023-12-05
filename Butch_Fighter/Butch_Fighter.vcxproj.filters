@@ -73,9 +73,6 @@
     <Image Include="Butch Fighter Baclground.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Mario.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Butch_Sprites.png">
       <Filter>Resource Files</Filter>
     </Image>
@@ -98,5 +95,10 @@
     <Media Include="Punch.wav">
       <Filter>Resource Files</Filter>
     </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="README.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
