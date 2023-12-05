@@ -107,8 +107,10 @@ void Menu::displayMenu()
                         break;
                     case 1:
                         window.clear();
+                        stopMenuMusic();
                         controls.ControlScreen(window);
                         std::cout << "control menu" << std::endl;
+
                         break;
                     case 2:
                         std::cout << "Closing the widnow and exiting the game" << std::endl;
