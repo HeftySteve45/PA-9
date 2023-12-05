@@ -212,7 +212,7 @@ void Controls::DrawControls(sf::RenderWindow& window)
 		P1[6].setScale(2, 2);
 
 		P2[6].setTexture(t2);
-		P2[6].setTextureRect(sf::IntRect(422, 160, 30, 30));
+		P2[6].setTextureRect(sf::IntRect(455, 160, 30, 30));
 		P2[6].setPosition(1100, 675);
 		P2[6].setScale(2, 2);
 

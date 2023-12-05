@@ -71,7 +71,7 @@ void ExitMenu::displayExitMenu(sf::RenderWindow& window)
         {
             switch (event.type)
             {
-            case sf::Event::KeyReleased:
+            case sf::Event::KeyPressed:
                 switch (event.key.code)
                 {
                 case sf::Keyboard::Left:
