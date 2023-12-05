@@ -7,7 +7,7 @@
 ExitMenu::ExitMenu()
 {
     exit_menu.setSize(sf::Vector2f(800, 400));
-    exit_menu.setFillColor(sf::Color(255, 255, 255, 128));
+    exit_menu.setFillColor(sf::Color(255, 255, 255, 120));
     exit_menu.setOutlineColor(sf::Color(128, 128, 128));
     exit_menu.setOutlineThickness(5);
     exit_menu.setPosition(sf::Vector2f(320, 150));
@@ -71,7 +71,7 @@ void ExitMenu::displayExitMenu(sf::RenderWindow& window)
         {
             switch (event.type)
             {
-            case sf::Event::KeyPressed:
+            case sf::Event::KeyReleased:
                 switch (event.key.code)
                 {
                 case sf::Keyboard::Left:

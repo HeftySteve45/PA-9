@@ -93,6 +93,7 @@ void Menu::displayMenu()
                     movedown();
                     break;
                 case sf::Keyboard::Escape:
+                    stopMenuMusic();
                     std::cout << "in the exit menu" << std::endl;
                     exit.displayExitMenu(window);
                     break;
