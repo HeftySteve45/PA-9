@@ -4,12 +4,9 @@ class Harry : public Fighter {
 
 public:
 	Harry() : Fighter() {
-		this->_facingRight = false; //start on right so face left
-		//TODO loadTextures();
+		loadTextures();
 		loadAtkSound("Punch.wav");
-		//TODO set first texture to sprite
-
-
+		this->_sprite.setPosition(sf::Vector2f(1290, this->_groundLevel));
 	}
 
 	~Harry();

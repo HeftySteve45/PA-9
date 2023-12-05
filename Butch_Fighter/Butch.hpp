@@ -4,10 +4,10 @@ class Butch : public Fighter {
 
 public:
 	Butch() : Fighter() {
-		//TODO loadTextures();
+		loadTextures();
 		loadAtkSound("Punch.wav");
 		//TODO set first texture to sprite
-
+		this->_sprite.setPosition(sf::Vector2f(150, this->_groundLevel));
 
 	}
 
