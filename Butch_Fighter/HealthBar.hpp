@@ -18,6 +18,7 @@ public:
 		
 		mBackBar.setSize(size);
 		mBackBar.setFillColor(sf::Color::Red);
+		this->mBackBar.setPosition(pos);
 		this->setPosition(pos);
 		this->setFillColor(sf::Color::Yellow);
 	}

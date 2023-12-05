@@ -104,6 +104,7 @@ void ExitMenu::displayExitMenu(sf::RenderWindow& window)
                 }
             }
         }
+
         window.draw(exit_menu);
         drawChoices(window);
         window.display();

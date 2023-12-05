@@ -5,17 +5,20 @@ Fighter::Fighter(const int HP, const int maxJumpVel, const bool facingRight)
 	this->_HP = HP;
 	this->_maxJumpVel = maxJumpVel;
 	this->_curJumpVel = 0;
-	this->_pTexture = nullptr;
-	this->_groundLevel = 475;
+	this->_groundLevel = 550;
 	this->_facingRight = facingRight;
+	this->_inAction = this->_inAir = this->_isBlocking = this->_moved = false;
+	this->_attacking = this->_defending = false;
+	this->cooldown = 0;
+	//box always exists, just out of the bounds so players do not collide with it accidentally 
+	this->_atkHitbox.setSize(sf::Vector2f(75, 75));
+	this->_atkHitbox.setPosition(sf::Vector2f(-300, -300));
+	this->_atkHitbox.setFillColor(sf::Color(255, 255, 255, 255));
 }
 
 Fighter::~Fighter()
 {
-	if (this->_pTexture != nullptr)
-	{
-		delete this->_pTexture;
-	}
+
 }
 
 int Fighter::getHP() const
@@ -23,34 +26,107 @@ int Fighter::getHP() const
 	return this->_HP;
 }
 
+bool Fighter::isAlive() const
+{
+	if (this->_HP == 0)
+	{
+		return false;
+	}
+	return true;
+}
+
 sf::Vector2f Fighter::getPlayerLoc() const
 {
 	return this->_sprite.getPosition();
 }
 
-void Fighter::setHP(int newHP)
+sf::Sprite Fighter::getPlayerBox() const
 {
-	this->_HP = newHP;
+	return this->_sprite;
+}
+
+sf::RectangleShape Fighter::getPlayerAtkBox() const
+{
+	return this->_atkHitbox;
+}
+
+void Fighter::pushBack(float numberPixels, bool override)
+{
+
+	if (this->_moved || override) {
+		if (this->_facingRight)
+		{
+			this->_sprite.move(sf::Vector2f(-numberPixels, 0));
+		}
+		else if (!this->_facingRight)
+		{
+			this->_sprite.move(sf::Vector2f(numberPixels, 0));
+		}
+	}
+
+}
+
+void Fighter::damage(int damage)
+{
+	if (this->_isBlocking)
+	{
+		this->_HP -= (damage / 2);
+	}
+	else
+	{
+		this->_HP -= damage;
+	}
 }
 
 void Fighter::draw(sf::RenderWindow& window)
 {
 	window.draw(this->_sprite);
+	window.draw(this->_atkHitbox);
 }
 
-void Fighter::moveL()
+void Fighter::moveB()
 {
-	this->_sprite.move(sf::Vector2f(-10, 0));
+	if (!this->_inAction) {
+		if (this->_facingRight)
+		{
+			this->_sprite.setTextureRect(this->_Animation[2]);
+		}
+		else
+		{
+			this->_sprite.setTextureRect(this->_Animation[1]);
+		}
+
+
+		if (this->_sprite.getPosition().x != 0)
+		{
+			this->_sprite.move(sf::Vector2f(-10, 0));
+		}
+	}
 }
 
-void Fighter::moveR()
+void Fighter::moveF()
 {
-	this->_sprite.move(sf::Vector2f(10, 0));
+	if (!this->_inAction) {
+		if (this->_facingRight)
+		{
+			this->_sprite.setTextureRect(this->_Animation[1]);
+		}
+		else
+		{
+			this->_sprite.setTextureRect(this->_Animation[2]);
+		}
+
+		this->_sprite.setTextureRect(this->_Animation[1]);
+		if (this->_sprite.getPosition().x != 1440)
+		{
+			this->_sprite.move(sf::Vector2f(10, 0));
+		}
+	}
 }
 
 void Fighter::jump()
 {
-	if (this->_sprite.getPosition().y == this->_groundLevel)//on the ground
+	if (!this->_inAction && !this->_inAir)//on the ground
 	{
 		this->_curJumpVel = this->_maxJumpVel;
 	}
@@ -58,26 +134,70 @@ void Fighter::jump()
 
 void Fighter::duck()
 {
-	if (this->_sprite.getPosition().y == this->_groundLevel)//on the ground
+	if (!this->_inAir && !this->_inAction)
 	{
-
+		this->_sprite.setTextureRect(this->_Animation[7]);
+		this->_sprite.setPosition(this->_sprite.getPosition().x, this->_sprite.getPosition().y + 80);
 	}
 }
 
-//void Fighter::punch()
-//{
-//
-//}
-//
-//void Fighter::kick()
-//{
-//
-//}
+void Fighter::punch()
+{
+	this->_sprite.setTextureRect(this->_Animation[5]);
+	if (!this->_inAction && !this->_inAir)
+	{
+		this->_atkSound.play();//TODO move this to punch and kick in Fighter.cpp when they are made
+		if (this->_facingRight)
+		{
+			this->_atkHitbox.setPosition(sf::Vector2f(this->_sprite.getPosition().x + 100, this->_sprite.getPosition().y));
+		}
+		else
+		{
+			this->_atkHitbox.setPosition(sf::Vector2f(this->_sprite.getPosition().x - 175, this->_sprite.getPosition().y));
+		}
+	}
+
+}
+
+void Fighter::kick()
+{
+	this->_sprite.setTextureRect(this->_Animation[6]);
+	if (!this->_inAction && !this->_inAir)
+	{
+		this->_atkSound.play();//TODO move this to punch and kick in Fighter.cpp when they are made
+		if (this->_facingRight)
+		{
+			this->_atkHitbox.setPosition(sf::Vector2f(this->_sprite.getPosition().x + 175, this->_sprite.getPosition().y));
+		}
+		else
+		{
+			this->_atkHitbox.setPosition(sf::Vector2f(this->_sprite.getPosition().x - 250, this->_sprite.getPosition().y));
+		}
+	}
+}
+
+void Fighter::block()
+{
+	this->_sprite.setTextureRect(this->_Animation[4]);
+	if (!this->_inAction && !this->_inAir)
+	{
+		this->_isBlocking = true;
+		//TODO play block animation, each animation 
+		//should be the same number of frames so we can 
+		//have a static var keep track of how many frames passed
+	}
+}
 
 void Fighter::updateGravity()//updates the gravity physics, should be called on each update after inputs are detected
 {
-	if (this->_curJumpVel > 0) {
+	if (this->_sprite.getPosition().y < this->_groundLevel) {
+		this->_inAir = true;
+		this->_moved = true;
 		this->_curJumpVel -= sqrt(this->_curJumpVel) / 5;//curv the velocity so it is fast and slows down as the player gets higher
+	}
+	else
+	{
+		this->_inAir = false;
 	}
 
 	if (this->_sprite.getPosition().y > this->_groundLevel)//under the floor, move them back to on the floor
@@ -88,26 +208,28 @@ void Fighter::updateGravity()//updates the gravity physics, should be called on 
 	{
 		this->_sprite.move(sf::Vector2f(0, 15));
 	}
-	
+
 	this->_sprite.move(sf::Vector2f(0, -this->_curJumpVel));
 }
 
 void Fighter::updateFacing(bool facingRight)
 {
-	if (!facingRight && this->_facingRight)//sprite needs to be flipped
+	if (!facingRight)//sprite needs to be flipped
 		//SHOULDNT face right and we ARE facing right, flip sprite
 	{
-		this->_sprite.setScale(sf::Vector2f(-0.25, 0.25));//TODO ensure scale is correct, first should be - to face left
+		this->_sprite.setScale(sf::Vector2f(-4, 4));
+		this->_facingRight = false;
 	}
-	else if (facingRight && !this->_facingRight)
+	else if (facingRight)
 		//SHOULD face right and we ARENT facing right, flip sprite
 	{
-		this->_sprite.setScale(sf::Vector2f(0.25, 0.25));//TODO ensure scale is correct, first should be + to face left
+		this->_sprite.setScale(sf::Vector2f(4, 4));
+		this->_facingRight = true;
 	}
 }
 
 void Fighter::loadAtkSound(const string& fileName)
 {
-	this->atkSoundBuf.loadFromFile(fileName);
-	this->atkSound.setBuffer(this->atkSoundBuf);
+	this->_atkSoundBuf.loadFromFile(fileName);
+	this->_atkSound.setBuffer(this->_atkSoundBuf);
 }

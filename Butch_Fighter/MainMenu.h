@@ -1,7 +1,9 @@
 #pragma once
 #include "ExitMenu.h"
 #include "Controls.h"
-
+#include "Butch.hpp"
+#include "Harry.hpp"
+#include "HealthBar.hpp"
 
 
 

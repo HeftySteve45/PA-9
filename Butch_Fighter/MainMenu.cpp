@@ -192,13 +192,99 @@ void Menu:: PlayGame(sf::RenderWindow& window)
 {
     sf::Sprite gamebackground;
     sf::Texture texture1;
- 
+    sf::Text winnerb, winnerh;
+    sf::Font winner;
+    int exit = 0;
+
+    winner.loadFromFile("Brush King.otf");
+
+    winnerb.setFont(winner);
+    winnerh.setFont(winner);
+    winnerb.setString("Butch Wins");
+    winnerh.setString("Harry Wins");
+    winnerb.setFillColor(sf::Color::Red);
+    winnerh.setFillColor(sf::Color::Red);
+    winnerb.setPosition(sf::Vector2f(470, 384));
+    winnerh.setPosition(sf::Vector2f(470, 384));
+    winnerb.setCharacterSize(60);
+    winnerh.setCharacterSize(60);
+  
     texture1.loadFromFile("Butch Fighter Baclground.png");
     gamebackground.setTexture(texture1);
     gamebackground.setScale(9, 4);
-    window.clear();
-    window.draw(gamebackground);
-    window.display();
+    
+    Butch butch;
+    Harry harry;
+
+    HealthBar bHealth(sf::Vector2f(620, 40), sf::Vector2f(0, 0));
+    HealthBar hHealth(sf::Vector2f(620, 40), sf::Vector2f(820, 0));
+
+    
+
+
+    while (exit != 1) {
+        //check for attack damage, 
+        if (butch.getPlayerAtkBox().getGlobalBounds().intersects(harry.getPlayerBox().getGlobalBounds()))
+        {
+            harry.damage(10);
+            harry.pushBack(100, true);
+        }
+        if (harry.getPlayerAtkBox().getGlobalBounds().intersects(butch.getPlayerBox().getGlobalBounds()))
+        {
+            butch.damage(10);
+            butch.pushBack(100, true);
+        }
+
+        bHealth.adjustSize(butch.getHP(), 100);
+        hHealth.adjustSize(harry.getHP(), 100);
+
+
+        //check if players are running into eachother
+
+        while (butch.getPlayerBox().getGlobalBounds().intersects(harry.getPlayerBox().getGlobalBounds()))
+        {
+            butch.pushBack(1,true);
+            harry.pushBack(1,true);
+        }
+
+        //ensure players always face eachother
+        if (harry.getPlayerLoc().x > butch.getPlayerLoc().x) {
+            butch.update(0.0, true);
+            harry.update(0.0, false);
+        }
+        else {
+            butch.update(0.0, false);
+            harry.update(0.0, true);
+        }
+
+        
+
+        window.draw(gamebackground);
+        butch.draw(window);
+        harry.draw(window);
+
+        window.draw(hHealth.getBackBar());
+        window.draw(bHealth.getBackBar());
+        window.draw(hHealth);
+        window.draw(bHealth);
+       
+
+        if (!butch.isAlive())
+        {
+            cout << "Butch has died" << endl;
+            exit = 1;
+            window.draw(winnerh);
+        }
+        if (!harry.isAlive())
+        {
+            cout << "Harry has died" << endl;
+            exit = 1;
+            window.draw(winnerb);
+        }
+
+        window.display();
+        window.clear();
+    }
 
     Sleep(3000);
 

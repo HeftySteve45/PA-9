@@ -73,6 +73,15 @@
     <Image Include="Butch Fighter Baclground.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Mario.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Butch_Sprites.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Harry_Sprites.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Martyric_PersonalUse.ttf">
