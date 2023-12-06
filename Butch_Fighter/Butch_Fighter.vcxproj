@@ -157,6 +157,9 @@
     <ClInclude Include="HealthBar.hpp" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Source Files\test.hpp" />
+    <ClInclude Include="TestExitMenu.hpp" />
+    <ClInclude Include="TestFighter.hpp" />
+    <ClInclude Include="TestHealthBar.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Butch background.png" />
