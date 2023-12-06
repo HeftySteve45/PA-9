@@ -7,7 +7,6 @@ HealthBar takes in two sf::Vector2f, the first is size of the healthbar, and the
 To update the health bar and show damage, you need to call the adjustSize function which takes two float values. the first is the current health value of the player and the second is the maximum health of the player.	
 	when the health bar/s is drawn by the window it will then show its updated size.
 
-currently the backbar(red part of the healthbar) and the healthbar itself need two seperate draw calls to display properly. you must draw the backbar before the Healthbar to display them properly. 
 */
 
 class HealthBar :public sf::RectangleShape
@@ -17,14 +16,15 @@ public:
 	{
 		
 		mBackBar.setSize(size);
-		mBackBar.setFillColor(sf::Color::Red);
+		mBackBar.setFillColor(sf::Color(166, 15, 45));
 		this->mBackBar.setPosition(pos);
 		this->setPosition(pos);
-		this->setFillColor(sf::Color::Yellow);
+		this->setFillColor(sf::Color(255, 198, 39));
 	}
 	
 	void adjustSize(float healthValue, float maxHealth);
-	
+	void draw(sf::RenderWindow& window);
+
 	sf::RectangleShape& getBackBar();
 
 private:

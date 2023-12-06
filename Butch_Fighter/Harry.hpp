@@ -3,19 +3,17 @@
 class Harry : public Fighter {
 
 public:
+
 	Harry() : Fighter() {
-		loadTextures();
+		loadTextures("Harry_Sprites.png");
 		loadAtkSound("Punch.wav");
-		this->_sprite.setPosition(sf::Vector2f(1290, this->_groundLevel));
+		this->_sprite.setPosition(sf::Vector2f(1290, this->_groundLevel));//start on right side of window
 	}
 
 	~Harry();
 
-	void update(float time, bool facingRight);
-
-
 private:
 
-	void loadTextures();
+	void updateInputs();
 
 };

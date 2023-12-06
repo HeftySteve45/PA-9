@@ -159,10 +159,12 @@
     <ClInclude Include="Source Files\test.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\OneDrive\Desktop\Football_Complex.png" />
     <Image Include="Butch background.png" />
-    <Image Include="Butch Fighter Baclground.png" />
+    <Image Include="Butch c.png" />
     <Image Include="Butch_Sprites.png" />
     <Image Include="Harry_Sprites.png" />
+    <Image Include="Keyboard.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Brush King.otf" />
