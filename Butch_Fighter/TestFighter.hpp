@@ -21,7 +21,7 @@ private:
 
 
 	//not used in testing, only used to prevent errors due to them being pure virtual functions
-	void update(float a,bool b);
+	void updateInputs();
 	void loadTextures();
 };
 
@@ -86,7 +86,7 @@ void TestFighter::TestAttackSound()
 }
 
 //Not Used
-void TestFighter::update(float a, bool b)
+void TestFighter::updateInputs()
 {
 }
 
