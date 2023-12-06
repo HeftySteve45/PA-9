@@ -186,11 +186,11 @@ void Fighter::punch()
 		this->_atkSound.play();
 		if (this->_facingRight)
 		{
-			this->_atkHitbox.setPosition(sf::Vector2f(this->_sprite.getPosition().x + 160, this->_sprite.getPosition().y - 85));
+			this->_atkHitbox.setPosition(sf::Vector2f(this->_sprite.getPosition().x + 160, this->_sprite.getPosition().y - 75));
 		}
 		else
 		{
-			this->_atkHitbox.setPosition(sf::Vector2f(this->_sprite.getPosition().x - 175, this->_sprite.getPosition().y - 85));
+			this->_atkHitbox.setPosition(sf::Vector2f(this->_sprite.getPosition().x - 175, this->_sprite.getPosition().y - 75));
 		}
 	}
 
