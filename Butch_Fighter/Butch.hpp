@@ -3,21 +3,17 @@
 class Butch : public Fighter {
 
 public:
+
 	Butch() : Fighter() {
-		loadTextures();
+		loadTextures("Butch_Sprites.png");
 		loadAtkSound("Punch.wav");
-		//TODO set first texture to sprite
-		this->_sprite.setPosition(sf::Vector2f(150, this->_groundLevel));
+		this->_sprite.setPosition(sf::Vector2f(150, this->_groundLevel));//start on left side of window
 
 	}
-
 	~Butch();
-
-	void update(float time, bool facingRight);
-
 
 private:
 
-	void loadTextures();
+	void updateInputs();
 
 };

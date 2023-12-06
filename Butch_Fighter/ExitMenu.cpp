@@ -15,7 +15,7 @@ ExitMenu::ExitMenu()
     //setting the color and position of the boxes
     boxes[0].setSize(sf::Vector2f(200, 100));
     boxes[1].setSize(sf::Vector2f(200, 100));
-    boxes[0].setFillColor(sf::Color::Red);
+    boxes[0].setFillColor(sf::Color(166, 15, 45));
     boxes[1].setFillColor(sf::Color(128, 128, 128));
     boxes[0].setPosition(sf::Vector2f(455, 400));
     boxes[1].setPosition(sf::Vector2f(805, 400));
@@ -30,7 +30,7 @@ ExitMenu::ExitMenu()
     //are you sure you want to exit text 
     words[0].setString("Are you sure you want to Exit");
     words[0].setFont(font);
-    words[0].setFillColor(sf::Color::Red);
+    words[0].setFillColor(sf::Color(166, 15, 45));
     words[0].setPosition(340, 200);
 
     //yes text 
@@ -100,6 +100,7 @@ void ExitMenu::displayExitMenu(sf::RenderWindow& window)
                         break;
                     case 1:
                         selected = 1;
+                        break;
                     }
                 }
             }
@@ -138,7 +139,7 @@ void ExitMenu::moveRight()
     {
         boxes[boxnumber].setFillColor(sf::Color(128, 128, 128));
         boxnumber++;
-        boxes[boxnumber].setFillColor(sf::Color::Red);
+        boxes[boxnumber].setFillColor(sf::Color(166, 15, 45));
         std::cout << "moving right" << std::endl;
     }
 }
@@ -154,7 +155,7 @@ void ExitMenu::moveleft()
 
         boxes[boxnumber].setFillColor(sf::Color(128, 128, 128));
         boxnumber--;
-        boxes[boxnumber].setFillColor(sf::Color::Red);
+        boxes[boxnumber].setFillColor(sf::Color(166, 15, 45));
         std::cout << "moving left" << std::endl;
     }
 }

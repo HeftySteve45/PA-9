@@ -70,13 +70,19 @@
     <Image Include="Butch background.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Butch Fighter Baclground.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Butch_Sprites.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Harry_Sprites.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\OneDrive\Desktop\Football_Complex.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Keyboard.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Butch c.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
