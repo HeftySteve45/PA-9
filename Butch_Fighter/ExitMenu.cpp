@@ -71,7 +71,7 @@ void ExitMenu::displayExitMenu(sf::RenderWindow& window)
         {
             switch (event.type)
             {
-            case sf::Event::KeyPressed:
+            case sf::Event::KeyReleased:
                 switch (event.key.code)
                 {
                 case sf::Keyboard::Left:
@@ -92,6 +92,7 @@ void ExitMenu::displayExitMenu(sf::RenderWindow& window)
 
                     break;
                 case sf::Keyboard::Enter:
+                   // std::cout << "Exit Menu enter pressed" << std::endl;
                     switch (GetBoxNumber())
                     {
                     case 0:

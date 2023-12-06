@@ -7,10 +7,11 @@ int main()
 {
     //uncomment to run test functions
 
-    /*TestExitMenu();
-    TestFighter tFighter;
-    tFighter.RunFighterTest();
-    TestHealthBar();*/
+    //TestExitMenu();
+    //TestFighter tFighter;
+    //tFighter.RunFighterTest();
+    //TestHealthBar();
+    
     
 
     Menu program;
