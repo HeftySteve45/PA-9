@@ -14,41 +14,48 @@ class Fighter {
 public:
 
 	Fighter(const int HP = 100, const int maxJumpVel = 50, const bool facingRight = true);
-	~Fighter();
+	virtual ~Fighter()
+	{
 
-	//getters
-	int getHP() const;
-	bool isAlive() const;
-	sf::Vector2f getPlayerLoc() const;
-	sf::Sprite getPlayerBox() const;
-	sf::RectangleShape getPlayerAtkBox() const;
-	void pushBack(float numberPixels, bool override = false);//pushes player back n number of pixels from the direction they are facing
+	}
 
-	void damage(int damage);
+	int getHP() const;//returns the current health of a fighter
+	int getMaxHP() const;//retrns the maximum health a fighter can have
+	bool isAlive() const;//reutrns true if the fighters health is > 0, else returns false
+	sf::Vector2f getPlayerLoc() const;//get the (x,y) pos of the fighters sprite origin
+	sf::Sprite getPlayerBox() const;//get the fighters hitbox
+	sf::RectangleShape getPlayerAtkBox() const;//get the fighters attack hitbox
+	void pushBack(float numberPixels);//pushes player back n number of pixels from the direction they are facing
 
-	virtual void update(float time, bool facingRight) = 0;//pure virtual, Butch and Harry have different key inputs to check check for
-	void draw(sf::RenderWindow& window);
+	void damage(int damage);//takes health away, if the fighter is blocking, it will take away 50% of the total damage
 
-	virtual void loadTextures() = 0;
+	void update(bool facingRight);//updates players inputs and locations along with sprite animation
+	void draw(sf::RenderWindow& window);//draws the fighter to the window
 
 protected:
 
 	//MOVEMENT
-	void moveF();
-	void moveB();
-	void jump();
-	void duck();
+	void moveF();//forward
+	void moveB();//backward
 
 	//ACTIONS
-	void punch();
-	void kick();
-	void block();
+	void punch();//shorter range attack, cannot be ducked under to miss damage
+	void kick();//longer range attack, can be ducked under to miss all damage
+	void block();//protects from 50% of damage of both a kick and a punch
+	void jump();//allows player to jump to dodge attack or to switch the sides
+	void duck();//allows the player to dodge a kick attack
 
+	//UPDATES
 	void updateGravity();//updates the gravity physics, should be called on each update
-	void updateFacing(bool facingRight);
-	void loadAtkSound(const string& fileName);
+	void updateFacing(bool facingRight);//ensure players always face the same direction by flipping sprite
+	virtual void updateInputs() = 0;//pure virtual since both butch and harry require different inputs
+
+	//ASSET LOADING
+	void loadTextures(const string& fileName);//loads textures by using sf::IntRect to cut sprite frames out of a single sheet
+	void loadAtkSound(const string& fileName);//loads the attack sound into memory
 
 	int _HP;
+	int _maxHP;
 	int _curJumpVel;
 	int _maxJumpVel;
 	int _groundLevel;
@@ -56,16 +63,12 @@ protected:
 	bool _inAir;
 	bool _inAction;
 	bool _isBlocking;
-	bool _moved;
-	bool _attacking;
 	bool _defending;
-	int cooldown; //counts frames, each attack is 0.55 seconds so it should max at 33 frames of cooldown
 
-	sf::Sprite _sprite;
-	sf::Texture _Texture;
-	sf::IntRect _Animation[9];
+	sf::Sprite _sprite;//a rectangle that can display an image
+	sf::Texture _Texture;//loads the entire sprite sheet
+	sf::IntRect _animation[9];//holds rectangle information for sprites out of our single sprite sheet
 	sf::SoundBuffer _atkSoundBuf;
 	sf::Sound _atkSound;
 	sf::RectangleShape _atkHitbox;//if this colides with the global bounds of another fighter, the fighter takes damage
-	sf::Clock clock;
 };

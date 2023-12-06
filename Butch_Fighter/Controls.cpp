@@ -12,7 +12,7 @@ Controls::Controls()
 	Tfont.loadFromFile("Martyric_PersonalUse.ttf");
 	title_name.setFont(Tfont);
 	title_name.setString("Controls");
-	title_name.setFillColor(sf::Color::Red);
+	title_name.setFillColor(sf::Color(166, 15, 45));
 	title_name.setOutlineColor(sf::Color::Black);
 	title_name.setOutlineThickness(3);
 	title_name.setCharacterSize(120);
@@ -24,20 +24,20 @@ Controls::Controls()
 	Titles[0].setFont(font);
 	Titles[0].setString("Movement");
 	Titles[0].setPosition(100, 175);
-	Titles[0].setFillColor(sf::Color::Red);
+	Titles[0].setFillColor(sf::Color(166, 15, 45));
 
 	//Butch 
 	Titles[1].setFont(font);
 	Titles[1].setString("Butch");
 	Titles[1].setPosition(580, 175);
-	Titles[1].setFillColor(sf::Color::Red);
+	Titles[1].setFillColor(sf::Color(166, 15, 45));
 
 
 	//Harry
 	Titles[2].setFont(font);
 	Titles[2].setString("Harry");
 	Titles[2].setPosition(1060, 175);
-	Titles[2].setFillColor(sf::Color::Red);
+	Titles[2].setFillColor(sf::Color(166, 15, 45));
 
 
 	//Movements 
@@ -77,7 +77,7 @@ Controls::Controls()
 	controls[6].setPosition(100, 700);
 
 	back_s.setSize(sf::Vector2f(150, 80));
-	back_s.setFillColor(sf::Color::Red);
+	back_s.setFillColor(sf::Color(166, 15, 45));
 	back_s.setPosition(10, 10);
 	back_s.setOutlineColor(sf::Color::Black);
 	back_s.setOutlineThickness(3);

@@ -10,7 +10,7 @@
 
      //play 
      MainMenu[0].setFont(choices);
-     MainMenu[0].setFillColor(sf::Color::Red);
+     MainMenu[0].setFillColor(sf::Color(166, 15, 45));
      MainMenu[0].setString("Play");
      MainMenu[0].setCharacterSize(50);
      MainMenu[0].setPosition(50, 220);
@@ -61,9 +61,9 @@ void Menu::displayMenu()
     MainTitle.setFont(title);
     MainTitle.setString("Butch Fighter");
     MainTitle.setCharacterSize(120);
-    MainTitle.setFillColor(sf::Color::Red);
+    MainTitle.setFillColor(sf::Color(166, 15, 45));
     MainTitle.setOutlineColor(sf::Color::Black);
-    MainTitle.setOutlineThickness(4);
+    MainTitle.setOutlineThickness(3);
     MainTitle.setPosition(384, 0);
 
     background.setTexture(texture1);
@@ -141,7 +141,7 @@ void Menu:: moveup()
     {
         MainMenu[selectedItem].setFillColor(sf::Color::Black);
         selectedItem--;
-        MainMenu[selectedItem].setFillColor(sf::Color::Red);
+        MainMenu[selectedItem].setFillColor(sf::Color(166, 15, 45));
         std::cout << "moving up" << std::endl;
     }
 }
@@ -156,7 +156,7 @@ void Menu::movedown()
     {
         MainMenu[selectedItem].setFillColor(sf::Color::Black);
         selectedItem++;
-        MainMenu[selectedItem].setFillColor(sf::Color::Red);
+        MainMenu[selectedItem].setFillColor(sf::Color(166, 15, 45));
         std::cout << "moving down" << std::endl;
     }
 }
@@ -203,16 +203,16 @@ void Menu:: PlayGame(sf::RenderWindow& window)
     winnerh.setFont(winner);
     winnerb.setString("Butch Wins");
     winnerh.setString("Harry Wins");
-    winnerb.setFillColor(sf::Color::Red);
-    winnerh.setFillColor(sf::Color::Red);
+    winnerb.setFillColor(sf::Color(166,15,45));
+    winnerh.setFillColor(sf::Color(166, 15, 45));
     winnerb.setPosition(sf::Vector2f(470, 384));
     winnerh.setPosition(sf::Vector2f(470, 384));
     winnerb.setCharacterSize(60);
     winnerh.setCharacterSize(60);
   
-    texture1.loadFromFile("Butch Fighter Baclground.png");
+    texture1.loadFromFile("Football_Complex.png");
     gamebackground.setTexture(texture1);
-    gamebackground.setScale(9, 4);
+    gamebackground.setScale(4.5, 3.84);
     
     Butch butch;
     Harry harry;
@@ -220,56 +220,49 @@ void Menu:: PlayGame(sf::RenderWindow& window)
     HealthBar bHealth(sf::Vector2f(620, 40), sf::Vector2f(0, 0));
     HealthBar hHealth(sf::Vector2f(620, 40), sf::Vector2f(820, 0));
 
-    
+    while (exit != 1) {//loops until one player dies
 
-
-    while (exit != 1) {
         //check for attack damage, 
         if (butch.getPlayerAtkBox().getGlobalBounds().intersects(harry.getPlayerBox().getGlobalBounds()))
         {
             harry.damage(10);
-            harry.pushBack(100, true);
+            harry.pushBack(100);//knock back
         }
         if (harry.getPlayerAtkBox().getGlobalBounds().intersects(butch.getPlayerBox().getGlobalBounds()))
         {
             butch.damage(10);
-            butch.pushBack(100, true);
+            butch.pushBack(100);//knock back
         }
 
-        bHealth.adjustSize(butch.getHP(), 100);
-        hHealth.adjustSize(harry.getHP(), 100);
+        //update the health bars
+        bHealth.adjustSize(butch.getHP(), butch.getMaxHP());
+        hHealth.adjustSize(harry.getHP(), harry.getMaxHP());
 
-
-        //check if players are running into eachother
-
+        //prevent fighters from moving through eachother, if they intersect we can push them apart until they do not intersect anymore
         while (butch.getPlayerBox().getGlobalBounds().intersects(harry.getPlayerBox().getGlobalBounds()))
         {
-            butch.pushBack(1,true);
-            harry.pushBack(1,true);
+            butch.pushBack(1);
+            harry.pushBack(1);
         }
 
         //ensure players always face eachother
-        if (harry.getPlayerLoc().x > butch.getPlayerLoc().x) {
-            butch.update(0.0, true);
-            harry.update(0.0, false);
+        if (harry.getPlayerLoc().x > butch.getPlayerLoc().x) {  //Butch on left and Harry on right
+            butch.update(true);
+            harry.update(false);
         }
-        else {
-            butch.update(0.0, false);
-            harry.update(0.0, true);
+        else { //Butch on right and Harry on left
+            butch.update(false);
+            harry.update(true);
         }
-
-        
 
         window.draw(gamebackground);
         butch.draw(window);
         harry.draw(window);
 
-        window.draw(hHealth.getBackBar());
-        window.draw(bHealth.getBackBar());
-        window.draw(hHealth);
-        window.draw(bHealth);
+        bHealth.draw(window);
+        hHealth.draw(window);
        
-
+        //Display death messages if a player has died
         if (!butch.isAlive())
         {
             cout << "Butch has died" << endl;
@@ -287,9 +280,7 @@ void Menu:: PlayGame(sf::RenderWindow& window)
         window.clear();
     }
 
-    Sleep(3000);
-
-    
+    Sleep(3000);//wait 3 seconds before returning to main menu
 }
 
 /*

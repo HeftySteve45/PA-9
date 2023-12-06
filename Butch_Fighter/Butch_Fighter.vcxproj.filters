@@ -65,18 +65,33 @@
     <ClInclude Include="Controls.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestHealthBar.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFighter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestExitMenu.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Butch background.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Butch Fighter Baclground.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Butch_Sprites.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Harry_Sprites.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\OneDrive\Desktop\Football_Complex.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Keyboard.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Butch c.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

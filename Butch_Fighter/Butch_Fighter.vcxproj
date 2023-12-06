@@ -157,12 +157,17 @@
     <ClInclude Include="HealthBar.hpp" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Source Files\test.hpp" />
+    <ClInclude Include="TestExitMenu.hpp" />
+    <ClInclude Include="TestFighter.hpp" />
+    <ClInclude Include="TestHealthBar.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\OneDrive\Desktop\Football_Complex.png" />
     <Image Include="Butch background.png" />
-    <Image Include="Butch Fighter Baclground.png" />
+    <Image Include="Butch c.png" />
     <Image Include="Butch_Sprites.png" />
     <Image Include="Harry_Sprites.png" />
+    <Image Include="Keyboard.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Brush King.otf" />
