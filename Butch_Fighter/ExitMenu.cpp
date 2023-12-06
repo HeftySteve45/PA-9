@@ -92,6 +92,7 @@ void ExitMenu::displayExitMenu(sf::RenderWindow& window)
 
                     break;
                 case sf::Keyboard::Enter:
+                   // std::cout << "Exit Menu enter pressed" << std::endl;
                     switch (GetBoxNumber())
                     {
                     case 0:
